@@ -5,738 +5,199 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b1220">
 <title>دفتر حساب موبایل علی</title>
-
 <style>
-:root{
-  --bg:#08111f;
-  --card:rgba(255,255,255,.075);
-  --line:rgba(255,255,255,.12);
-  --text:#eef5ff;
-  --muted:#9fb0c5;
-  --accent:#42a5ff;
-  --danger:#ff667a;
-  --ok:#36d399;
-  --shadow:0 18px 50px rgba(0,0,0,.25)
-}
-
-*{
-  box-sizing:border-box
-}
-
-body{
-  margin:0;
-  background:
-    radial-gradient(circle at 10% 0%,#12345a 0,#08111f 35%,#050a12 100%);
-  color:var(--text);
-  font-family:Tahoma,Arial,sans-serif;
-  min-height:100vh
-}
-
-button,
-input,
-select,
-textarea{
-  font:inherit
-}
-
-button{
-  cursor:pointer;
-  border:0
-}
-
-.wrap{
-  max-width:1180px;
-  margin:auto;
-  padding:18px
-}
-
-.glass{
-  background:var(--card);
-  border:1px solid var(--line);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  box-shadow:var(--shadow);
-  border-radius:22px
-}
-
-/* هدر */
-
-header{
-  padding:20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px
-}
-
-.logo{
-  width:48px;
-  height:48px;
-  border-radius:15px;
-  background:linear-gradient(135deg,#55b5ff,#1765d1);
-  display:grid;
-  place-items:center;
-  font-weight:900;
-  font-size:22px
-}
-
-.brand h1{
-  margin:0;
-  font-size:20px
-}
-
-.brand p{
-  margin:5px 0 0;
-  color:var(--muted);
-  font-size:12px
-}
-
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap
-}
-
-/* دکمه‌ها */
-
-.btn{
-  padding:10px 14px;
-  border-radius:12px;
-  color:white;
-  background:#1d3552;
-  border:1px solid var(--line)
-}
-
-.btn.primary{
-  background:linear-gradient(135deg,#2187ed,#1556ba)
-}
-
-.btn.ok{
-  background:#116d53
-}
-
-.btn.danger{
-  background:#7d2637
-}
-
-.btn.small{
-  padding:7px 10px;
-  font-size:12px
-}
-
-/* فرم‌ها */
-
-input,
-select,
-textarea{
-  width:100%;
-  background:rgba(0,0,0,.2);
-  border:1px solid var(--line);
-  color:var(--text);
-  border-radius:12px;
-  padding:11px;
-  outline:none
-}
-
-textarea{
-  min-height:80px;
-  resize:vertical
-}
-
-label{
-  font-size:12px;
-  color:var(--muted);
-  display:block;
-  margin-bottom:6px
-}
-
-.field{
-  margin-bottom:12px
-}
-
-/* کارت‌های آماری */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin:14px 0
-}
-
-.stat{
-  padding:18px
-}
-
-.stat span{
-  color:var(--muted);
-  font-size:12px
-}
-
-.stat strong{
-  display:block;
-  font-size:22px;
-  margin-top:8px
-}
-
-.money{
-  direction:ltr;
-  text-align:right
-}
-
-/* منوی اصلی */
-
-nav{
-  display:flex;
-  gap:8px;
-  overflow:auto;
-  margin:14px 0;
-  padding:5px
-}
-
-.tab{
-  padding:10px 14px;
-  border-radius:12px;
-  color:var(--muted);
-  background:transparent;
-  white-space:nowrap
-}
-
-.tab.active{
-  background:rgba(66,165,255,.16);
-  color:#fff;
-  border:1px solid rgba(66,165,255,.3)
-}
-
-/* پنل‌ها */
-
-.panel{
-  padding:18px;
-  margin-bottom:14px
-}
-
-.grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px
-}
-
-.grid3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px
-}
-
-.form-actions{
-  display:flex;
-  gap:8px;
-  justify-content:flex-start;
-  flex-wrap:wrap
-}
-
-.search{
-  margin-bottom:12px
-}
-
-/* جدول */
-
-.tablewrap{
-  overflow:auto
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:720px
-}
-
-th,
-td{
-  text-align:right;
-  padding:12px;
-  border-bottom:1px solid var(--line);
-  font-size:13px
-}
-
-th{
-  color:var(--muted);
-  font-weight:500
-}
-
-/* وضعیت بدهی */
-
-.badge{
-  padding:5px 8px;
-  border-radius:999px;
-  font-size:11px
-}
-
-.badge.due{
-  background:rgba(255,102,122,.14);
-  color:#ff8796
-}
-
-.badge.paid{
-  background:rgba(54,211,153,.14);
-  color:#65e1b1
-}
-
-/* متن‌ها */
-
-.muted{
-  color:var(--muted)
-}
-
-.empty{
-  padding:35px;
-  text-align:center;
-  color:var(--muted)
-}
-
-.hint{
-  font-size:11px;
-  color:var(--muted);
-  line-height:1.8
-}
-
-.dangerText{
-  color:#ff8b9a
-}
-
-/* کارت مشتری */
-
-.customer-card{
-  padding:15px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  margin:8px 0;
-  background:rgba(255,255,255,.035)
-}
-
-.customer-card .row{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:center
-}
-
-/* نمایش/عدم نمایش */
-
-.hidden{
-  display:none!important
-}
-
-/* پنجره‌های بازشو */
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.65);
-  display:grid;
-  place-items:center;
-  padding:18px;
-  z-index:20
-}
-
-.modalbox{
-  max-width:620px;
-  width:100%;
-  max-height:90vh;
-  overflow:auto;
-  padding:20px
-}
-
-/* پیام کوچک */
-
-.toast{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#101b2b;
-  border:1px solid var(--line);
-  padding:12px 18px;
-  border-radius:12px;
-  z-index:50
-}
-
-/* پایین صفحه */
-
-.footer{
-  text-align:center;
-  color:var(--muted);
-  font-size:11px;
-  padding:20px
-}
-
-/* موبایل */
-
-@media(max-width:800px){
-
-  .stats{
-    grid-template-columns:1fr 1fr
-  }
-
-  .grid2,
-  .grid3{
-    grid-template-columns:1fr
-  }
-
-  header{
-    align-items:flex-start;
-    flex-direction:column
-  }
-
-  .actions{
-    width:100%
-  }
-
-  .actions .btn{
-    flex:1
-  }
-}
+:root{--bg:#08111f;--card:rgba(255,255,255,.075);--line:rgba(255,255,255,.12);--text:#eef5ff;--muted:#9fb0c5;--accent:#42a5ff;--danger:#ff667a;--ok:#36d399;--shadow:0 18px 50px rgba(0,0,0,.25)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#12345a 0,#08111f 35%,#050a12 100%);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.wrap{max-width:1180px;margin:auto;padding:18px}.glass{background:var(--card);border:1px solid var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:var(--shadow);border-radius:22px}
+header{padding:20px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,#55b5ff,#1765d1);display:grid;place-items:center;font-weight:900;font-size:22px}.brand h1{margin:0;font-size:20px}.brand p{margin:5px 0 0;color:var(--muted);font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:10px 14px;border-radius:12px;color:white;background:#1d3552;border:1px solid var(--line)}.btn.primary{background:linear-gradient(135deg,#2187ed,#1556ba)}.btn.ok{background:#116d53}.btn.danger{background:#7d2637}.btn.small{padding:7px 10px;font-size:12px}
+input,select,textarea{width:100%;background:rgba(0,0,0,.2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:11px;outline:none}textarea{min-height:80px;resize:vertical}label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}.field{margin-bottom:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}.stat{padding:18px}.stat span{color:var(--muted);font-size:12px}.stat strong{display:block;font-size:22px;margin-top:8px}.money{direction:ltr;text-align:right}
+nav{display:flex;gap:8px;overflow:auto;margin:14px 0;padding:5px}.tab{padding:10px 14px;border-radius:12px;color:var(--muted);background:transparent;white-space:nowrap}.tab.active{background:rgba(66,165,255,.16);color:#fff;border:1px solid rgba(66,165,255,.3)}
+.panel{padding:18px;margin-bottom:14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.form-actions{display:flex;gap:8px;justify-content:flex-start;flex-wrap:wrap}.search{margin-bottom:12px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:720px}th,td{text-align:right;padding:12px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted);font-weight:500}.badge{padding:5px 8px;border-radius:999px;font-size:11px}.badge.due{background:rgba(255,102,122,.14);color:#ff8796}.badge.paid{background:rgba(54,211,153,.14);color:#65e1b1}.muted{color:var(--muted)}.empty{padding:35px;text-align:center;color:var(--muted)}.customer-card{padding:15px;border:1px solid var(--line);border-radius:16px;margin:8px 0;background:rgba(255,255,255,.035)}.customer-card .row{display:flex;justify-content:space-between;gap:10px;align-items:center}.hidden{display:none!important}.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:grid;place-items:center;padding:18px;z-index:20}.modalbox{max-width:620px;width:100%;max-height:90vh;overflow:auto;padding:20px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#101b2b;border:1px solid var(--line);padding:12px 18px;border-radius:12px;z-index:50}.hint{font-size:11px;color:var(--muted);line-height:1.8}.dangerText{color:#ff8b9a}.footer{text-align:center;color:var(--muted);font-size:11px;padding:20px}
+@media(max-width:800px){.stats{grid-template-columns:1fr 1fr}.grid2,.grid3{grid-template-columns:1fr}header{align-items:flex-start;flex-direction:column}.actions{width:100%}.actions .btn{flex:1}}
 </style>
 </head>
-
 <body>
-
 <div class="wrap">
-
-<!-- =========================
-     هدر سایت
-========================= -->
-
 <header class="glass">
-
-  <div class="brand">
-
-    <div class="logo">
-      ع
-    </div>
-
-    <div>
-      <h1>دفتر حساب موبایل علی</h1>
-
-      <p>
-        ثبت مشتری، بدهی، اقساط و رسید تصویری
-      </p>
-    </div>
-
-  </div>
-
-  <div class="actions">
-
-    <button
-      class="btn primary"
-      onclick="openCustomer()">
-      ＋ مشتری جدید
-    </button>
-
-    <button
-      class="btn"
-      onclick="backup()">
-      ⬇ پشتیبان
-    </button>
-
-    <label
-      class="btn"
-      style="display:inline-block;cursor:pointer">
-
-      ⬆ بازیابی
-
-      <input
-        id="restore"
-        type="file"
-        accept=".json"
-        hidden
-        onchange="restoreFile(event)">
-
-    </label>
-
-  </div>
-
+ <div class="brand"><div class="logo">ع</div><div><h1>دفتر حساب موبایل علی</h1><p>ثبت مشتری، بدهی، اقساط و رسید تصویری</p></div></div>
+ <div class="actions">
+  <button class="btn primary" onclick="openCustomer()">＋ مشتری جدید</button>
+  <button class="btn" onclick="backup()">⬇ پشتیبان</button>
+  <label class="btn" style="display:inline-block;cursor:pointer">⬆ بازیابی<input id="restore" type="file" accept=".json" hidden onchange="restoreFile(event)"></label>
+ </div>
 </header>
 
-
-<!-- =========================
-     کارت‌های آماری
-========================= -->
-
 <div class="stats">
-
-  <div class="stat glass">
-
-    <span>
-      کل بدهی باقی‌مانده
-    </span>
-
-    <strong id="sDebt">
-      ۰
-    </strong>
-
-  </div>
-
-
-  <div class="stat glass">
-
-    <span>
-      مجموع پرداخت‌ها
-    </span>
-
-    <strong id="sPaid">
-      ۰
-    </strong>
-
-  </div>
-
-
-  <div class="stat glass">
-
-    <span>
-      مشتریان بدهکار
-    </span>
-
-    <strong id="sCustomers">
-      ۰
-    </strong>
-
-  </div>
-
-
-  <div class="stat glass">
-
-    <span>
-      تعداد بدهی‌ها
-    </span>
-
-    <strong id="sDebts">
-      ۰
-    </strong>
-
-  </div>
-
+ <div class="stat glass"><span>کل بدهی باقی‌مانده</span><strong id="sDebt">۰</strong></div>
+ <div class="stat glass"><span>مجموع پرداخت‌ها</span><strong id="sPaid">۰</strong></div>
+ <div class="stat glass"><span>مشتریان بدهکار</span><strong id="sCustomers">۰</strong></div>
+ <div class="stat glass"><span>تعداد بدهی‌ها</span><strong id="sDebts">۰</strong></div>
 </div>
 
-
-<!-- =========================
-     منوی اصلی
-========================= -->
-
 <nav class="glass">
-
-  <button
-    class="tab active"
-    data-tab="dashboard">
-
-    داشبورد
-
-  </button>
-
-
-  <button
-    class="tab"
-    data-tab="customers">
-
-    مشتریان
-
-  </button>
-
-
-  <button
-    class="tab"
-    data-tab="debts">
-
-    بدهی‌ها و اقساط
-
-  </button>
-
-
-  <button
-    class="tab"
-    data-tab="backup">
-
-    پشتیبان
-
-  </button>
-
+ <button class="tab active" data-tab="dashboard">داشبورد</button>
+ <button class="tab" data-tab="customers">مشتریان</button>
+ <button class="tab" data-tab="debts">بدهی‌ها و اقساط</button>
+ <button class="tab" data-tab="backup">پشتیبان</button>
 </nav>
 
-
-<!-- =========================
-     داشبورد
-========================= -->
-
-<section
-  id="dashboard"
-  class="page">
-
-  <div class="glass panel">
-
-    <h3>
-      آخرین بدهی‌ها
-    </h3>
-
-    <div id="recent"></div>
-
-  </div>
-
+<section id="dashboard" class="page">
+ <div class="glass panel"><h3>آخرین بدهی‌ها</h3><div id="recent"></div></div>
 </section>
 
-
-<!-- =========================
-     مشتریان
-========================= -->
-
-<section
-  id="customers"
-  class="page hidden">
-
-  <div class="glass panel">
-
-    <div class="grid2">
-
-      <div>
-
-        <h3>
-          مشتریان
-        </h3>
-
-      </div>
-
-
-      <div>
-
-        <input
-          id="customerSearch"
-          placeholder="جستجوی نام یا شماره..."
-          oninput="renderCustomers()">
-
-      </div>
-
-    </div>
-
-
-    <div id="customersList"></div>
-
-  </div>
-
+<section id="customers" class="page hidden">
+ <div class="glass panel">
+  <div class="grid2"><div><h3>مشتریان</h3></div><div><input id="customerSearch" placeholder="جستجوی نام یا شماره..." oninput="renderCustomers()"></div></div>
+  <div id="customersList"></div>
+ </div>
 </section>
 
-
-<!-- =========================
-     بدهی‌ها و اقساط
-========================= -->
-
-<section
-  id="debts"
-  class="page hidden">
-
-  <div class="glass panel">
-
-    <div class="grid2">
-
-      <div>
-
-        <h3>
-          ثبت بدهی / فاکتور اقساط
-        </h3>
-
-      </div>
-
-
-      <div>
-
-        <button
-          class="btn primary"
-          onclick="openDebt()">
-
-          ＋ ثبت بدهی جدید
-
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div id="debtsList"></div>
-
+<section id="debts" class="page hidden">
+ <div class="glass panel">
+  <div class="grid2">
+   <div><h3>ثبت بدهی / فاکتور اقساط</h3></div>
+   <div><button class="btn primary" onclick="openDebt()">＋ ثبت بدهی جدید</button></div>
   </div>
-
+  <div id="debtsList"></div>
+ </div>
 </section>
 
-
-<!-- =========================
-     پشتیبان
-========================= -->
-
-<section
-  id="backup"
-  class="page hidden">
-
-  <div class="glass panel">
-
-    <h3>
-      پشتیبان اطلاعات
-    </h3>
-
-
-    <p class="hint">
-
-      تاریخ‌های فاکتور و رسید به تقویم شمسی نمایش داده می‌شوند.
-      اطلاعات این نسخه در مرورگر همین دستگاه ذخیره می‌شود.
-      برای جلوگیری از از دست رفتن اطلاعات،
-      مرتباً پشتیبان JSON دانلود کنید و در جای امن نگه دارید.
-
-    </p>
-
-
-    <div class="form-actions">
-
-      <button
-        class="btn primary"
-        onclick="backup()">
-
-        دانلود پشتیبان
-
-      </button>
-
-
-      <label class="btn">
-
-        بازیابی پشتیبان
-
-        <input
-          type="file"
-          accept=".json"
-          hidden
-          onchange="restoreFile(event)">
-
-      </label>
-
-    </div>
-
-
-    <hr
-      style="border-color:var(--line);margin:20px 0">
-
-
-    <button
-      class="btn danger"
-      onclick="clearAll()">
-
-      حذف کامل اطلاعات
-
-    </button>
-
-  </div>
-
+<section id="backup" class="page hidden">
+ <div class="glass panel">
+  <h3>پشتیبان اطلاعات</h3>
+  <p class="hint">تاریخ‌های فاکتور و رسید به تقویم شمسی نمایش داده می‌شوند. اطلاعات این نسخه در مرورگر همین دستگاه ذخیره می‌شود. برای جلوگیری از از دست رفتن اطلاعات، مرتباً پشتیبان JSON دانلود کنید و در جای امن نگه دارید.</p>
+  <div class="form-actions"><button class="btn primary" onclick="backup()">دانلود پشتیبان</button><label class="btn">بازیابی پشتیبان<input type="file" accept=".json" hidden onchange="restoreFile(event)"></label></div>
+  <hr style="border-color:var(--line);margin:20px 0">
+  <button class="btn danger" onclick="clearAll()">حذف کامل اطلاعات</button>
+ </div>
 </section>
 
+<div class="footer">نسخه محلی — مناسب GitHub Pages</div>
+</div>
 
-<!--
+<div id="modal" class="modal hidden"><div class="glass modalbox" id="modalContent"></div></div>
+<div id="toast" class="toast hidden"></div>
+
+<script>
+const KEY='mobileAliDebt_v1';
+let db=JSON.parse(localStorage.getItem(KEY)||'{"customers":[],"debts":[],"payments":[]}');
+const save=()=>localStorage.setItem(KEY,JSON.stringify(db));
+const id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const fmt=n=>new Intl.NumberFormat('fa-IR').format(Math.round(Number(n)||0));
+const money=n=>fmt(n)+' تومان';
+const today=()=>new Date().toISOString().slice(0,10);
+const shamsiDate=(value)=>{
+  if(!value) return '—';
+  const d=new Date(value+'T12:00:00');
+  return new Intl.DateTimeFormat('fa-IR-u-ca-persian',{year:'numeric',month:'2-digit',day:'2-digit'}).format(d);
+};
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function toast(t){const x=document.getElementById('toast');x.textContent=t;x.classList.remove('hidden');setTimeout(()=>x.classList.add('hidden'),2200)}
+function closeModal(){document.getElementById('modal').classList.add('hidden')}
+function showModal(html){document.getElementById('modalContent').innerHTML=html;document.getElementById('modal').classList.remove('hidden')}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(b.dataset.tab).classList.remove('hidden');renderAll()});
+
+function openCustomer(c=null){
+ showModal(`<h3>${c?'ویرایش مشتری':'مشتری جدید'}</h3>
+ <div class="field"><label>نام و نام خانوادگی</label><input id="cName" value="${esc(c?.name)}"></div>
+ <div class="field"><label>شماره موبایل</label><input id="cPhone" inputmode="tel" value="${esc(c?.phone)}"></div>
+ <div class="field"><label>توضیحات</label><textarea id="cNote">${esc(c?.note)}</textarea></div>
+ <div class="form-actions"><button class="btn primary" onclick="saveCustomer('${c?.id||''}')">ذخیره</button><button class="btn" onclick="closeModal()">انصراف</button></div>`);
+}
+function saveCustomer(cid){let name=document.getElementById('cName').value.trim(),phone=document.getElementById('cPhone').value.trim(),note=document.getElementById('cNote').value.trim();if(!name)return toast('نام مشتری را وارد کنید');if(cid){Object.assign(db.customers.find(x=>x.id===cid),{name,phone,note})}else db.customers.push({id:id(),name,phone,note,createdAt:new Date().toISOString()});save();closeModal();renderAll();toast('مشتری ذخیره شد')}
+function customerName(cid){return db.customers.find(x=>x.id===cid)?.name||'مشتری حذف‌شده'}
+function debtTotal(d){return Number(d.amount)||0}
+function paidFor(did){return db.payments.filter(p=>p.debtId===did).reduce((a,p)=>a+Number(p.amount||0),0)}
+function remaining(d){return Math.max(0,debtTotal(d)-paidFor(d.id))}
+function totalDebt(){return db.debts.reduce((a,d)=>a+remaining(d),0)}
+function openDebt(d=null){
+ const opts=db.customers.map(c=>`<option value="${c.id}" ${d?.customerId===c.id?'selected':''}>${esc(c.name)} — ${esc(c.phone||'بدون شماره')}</option>`).join('');
+ if(!opts)return showModal('<h3>ابتدا مشتری بسازید</h3><p class="hint">برای ثبت بدهی ابتدا یک مشتری اضافه کنید.</p><button class="btn primary" onclick="closeModal();openCustomer()">＋ مشتری جدید</button>');
+ showModal(`<h3>${d?'ویرایش بدهی':'ثبت بدهی / فاکتور'}</h3>
+ <div class="field"><label>مشتری</label><select id="dCustomer">${opts}</select></div>
+ <div class="grid2"><div class="field"><label>مبلغ کل (تومان)</label><input id="dAmount" type="number" value="${d?.amount||''}"></div><div class="field"><label>تاریخ ثبت</label><input id="dDate" type="date" value="${d?.date||today()}"></div></div>
+ <div class="grid2"><div class="field"><label>عنوان / بابت</label><input id="dTitle" value="${esc(d?.title||'تعمیرات موبایل')}"></div><div class="field"><label>تاریخ سررسید</label><input id="dDue" type="date" value="${d?.dueDate||''}"></div></div>
+ <div class="field"><label>توضیحات</label><textarea id="dNote">${esc(d?.note||'')}</textarea></div>
+ <div class="form-actions"><button class="btn primary" onclick="saveDebt('${d?.id||''}')">ذخیره</button><button class="btn" onclick="closeModal()">انصراف</button></div>`);
+}
+function saveDebt(did){let customerId=document.getElementById('dCustomer').value,amount=Number(document.getElementById('dAmount').value),date=document.getElementById('dDate').value||today(),title=document.getElementById('dTitle').value.trim(),dueDate=document.getElementById('dDue').value,note=document.getElementById('dNote').value.trim();if(!amount||amount<1)return toast('مبلغ معتبر وارد کنید');if(did)Object.assign(db.debts.find(x=>x.id===did),{customerId,amount,date,title,dueDate,note});else db.debts.push({id:id(),customerId,amount,date,title,dueDate,note});save();closeModal();renderAll();toast('فاکتور ذخیره شد')}
+function addPayment(d){
+ showModal(`<h3>ثبت قسط / پرداخت</h3><p>${esc(customerName(d.customerId))} — ${esc(d.title)}</p><p>مانده فعلی: <b>${money(remaining(d))}</b></p>
+ <div class="field"><label>مبلغ پرداختی (تومان)</label><input id="pAmount" type="number"></div>
+ <div class="grid2"><div class="field"><label>تاریخ</label><input id="pDate" type="date" value="${today()}"></div><div class="field"><label>توضیح</label><input id="pNote" placeholder="مثلاً قسط اول"></div></div>
+ <div class="form-actions"><button class="btn ok" onclick="savePayment('${d.id}')">ثبت پرداخت</button><button class="btn" onclick="closeModal()">انصراف</button></div>`);
+}
+function savePayment(did){let amount=Number(document.getElementById('pAmount').value),d=db.debts.find(x=>x.id===did);if(!amount||amount<1||amount>remaining(d))return toast('مبلغ پرداختی معتبر نیست');db.payments.push({id:id(),debtId:did,amount,date:document.getElementById('pDate').value||today(),note:document.getElementById('pNote').value.trim()});save();closeModal();renderAll();toast('پرداخت ثبت شد')}
+function renderCustomers(){let q=(document.getElementById('customerSearch')?.value||'').trim().toLowerCase();let arr=db.customers.filter(c=>(c.name+' '+c.phone).toLowerCase().includes(q));document.getElementById('customersList').innerHTML=arr.length?arr.map(c=>{let ds=db.debts.filter(d=>d.customerId===c.id),bal=ds.reduce((a,d)=>a+remaining(d),0);return `<div class="customer-card"><div class="row"><div><b>${esc(c.name)}</b><div class="muted">${esc(c.phone||'بدون شماره')}</div></div><div class="money">${money(bal)}</div></div><div class="form-actions" style="margin-top:10px"><button class="btn small primary" onclick="openDebtFor('${c.id}')">＋ بدهی</button><button class="btn small" onclick="openCustomer(db.customers.find(x=>x.id==='${c.id}'))">ویرایش</button><button class="btn small" onclick="customerDetails('${c.id}')">جزئیات</button></div></div>`}).join(''):'<div class="empty">مشتری‌ای ثبت نشده است.</div>'}
+function openDebtFor(cid){openDebt();setTimeout(()=>document.getElementById('dCustomer').value=cid,0)}
+function customerDetails(cid){let c=db.customers.find(x=>x.id===cid),ds=db.debts.filter(d=>d.customerId===cid),bal=ds.reduce((a,d)=>a+remaining(d),0);showModal(`<h3>${esc(c.name)}</h3><p class="muted">${esc(c.phone||'')}</p><h3>مانده: ${money(bal)}</h3>${ds.map(d=>`<div class="customer-card"><b>${esc(d.title)}</b><div class="muted">${esc(d.date)} · کل ${money(d.amount)}</div><div>مانده: <b>${money(remaining(d))}</b></div><button class="btn small" style="margin-top:8px" onclick="invoice('${d.id}')">رسید تصویری</button></div>`).join('')||'<div class="empty">تراکنشی ندارد.</div>'}<button class="btn" onclick="closeModal()">بستن</button>`)}
+function renderDebts(){let arr=[...db.debts].sort((a,b)=>b.date.localeCompare(a.date));document.getElementById('debtsList').innerHTML=arr.length?`<div class="tablewrap"><table><thead><tr><th>مشتری</th><th>عنوان</th><th>کل</th><th>پرداخت</th><th>مانده</th><th>وضعیت</th><th>عملیات</th></tr></thead><tbody>${arr.map(d=>{let p=paidFor(d.id),r=remaining(d),over=d.dueDate&&d.dueDate<today()&&r>0;return `<tr><td>${esc(customerName(d.customerId))}</td><td>${esc(d.title)}<br><small class="muted">${esc(d.date)}</small></td><td>${money(d.amount)}</td><td>${money(p)}</td><td><b>${money(r)}</b></td><td><span class="badge ${r?'due':'paid'}">${r?(over?'سررسید گذشته':'بدهکار'):'تسویه'}</span></td><td><button class="btn small ok" ${r?'':'disabled'} onclick="addPayment(db.debts.find(x=>x.id==='${d.id}'))">قسط</button> <button class="btn small" onclick="invoice('${d.id}')">رسید</button> <button class="btn small" onclick="openDebt(db.debts.find(x=>x.id==='${d.id}'))">ویرایش</button></td></tr>`}).join('')}</tbody></table></div>`:'<div class="empty">بدهی‌ای ثبت نشده است.</div>'}
+function renderRecent(){let arr=[...db.debts].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,7);document.getElementById('recent').innerHTML=arr.length?arr.map(d=>`<div class="customer-card"><div class="row"><div><b>${esc(customerName(d.customerId))}</b><div class="muted">${esc(d.title)} · ${esc(shamsiDate(d.date))}</div></div><div><b>${money(remaining(d))}</b><br><button class="btn small" onclick="invoice('${d.id}')">رسید</button></div></div></div>`).join(''):'<div class="empty">هنوز تراکنشی ثبت نشده است.</div>'}
+function renderAll(){document.getElementById('sDebt').textContent=fmt(totalDebt())+' تومان';document.getElementById('sPaid').textContent=fmt(db.payments.reduce((a,p)=>a+Number(p.amount||0),0))+' تومان';document.getElementById('sCustomers').textContent=fmt(db.customers.filter(c=>db.debts.some(d=>d.customerId===c.id&&remaining(d)>0)).length);document.getElementById('sDebts').textContent=fmt(db.debts.length);renderCustomers();renderDebts();renderRecent()}
+function backup(){let blob=new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),...db},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mobile-ali-backup-'+today()+'.json';a.click();URL.revokeObjectURL(a.href);toast('پشتیبان دانلود شد')}
+function restoreFile(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!Array.isArray(x.customers)||!Array.isArray(x.debts)||!Array.isArray(x.payments))throw Error();db={customers:x.customers,debts:x.debts,payments:x.payments};save();renderAll();toast('پشتیبان با موفقیت بازیابی شد')}catch(_){toast('فایل پشتیبان معتبر نیست')}};r.readAsText(f);e.target.value=''}
+function clearAll(){if(confirm('تمام اطلاعات این دستگاه حذف شود؟ این کار قابل بازگشت نیست.')){db={customers:[],debts:[],payments:[]};save();renderAll();toast('اطلاعات حذف شد')}}
+async function invoice(did){
+ const d=db.debts.find(x=>x.id===did),c=db.customers.find(x=>x.id===d.customerId),ps=db.payments.filter(p=>p.debtId===did);
+ const canvas=document.createElement('canvas'),w=1200,h=1450;canvas.width=w;canvas.height=h;
+ const x=canvas.getContext('2d');
+ x.fillStyle='#f7f9fc';x.fillRect(0,0,w,h);
+ x.fillStyle='#0c1726';x.fillRect(0,0,w,190);
+
+ const logo=new Image();
+ await new Promise(resolve=>{
+   logo.onload=resolve; logo.onerror=resolve; logo.src='logo.jpg';
+ });
+ if(logo.complete && logo.naturalWidth){
+   x.save();x.beginPath();x.arc(1050,95,65,0,Math.PI*2);x.clip();x.drawImage(logo,985,30,130,130);x.restore();
+ }
+
+ x.fillStyle='#fff';x.textAlign='right';
+ x.font='bold 42px Tahoma';x.fillText('موبایل علی',900,70);
+ x.font='24px Tahoma';x.fillText('رسید حساب / اقساط مشتری',900,110);
+ x.font='18px Tahoma';x.fillText('سرخس، طالقانی غربی، موبایل علی',900,145);
+ x.fillText('آقای خزیمه | 09300517581 | 09158168025',900,172);
+
+ x.fillStyle='#16253a';
+ x.font='bold 30px Tahoma';x.fillText('نام مشتری: '+(c?.name||''),1090,250);
+ x.font='23px Tahoma';x.fillText('شماره: '+(c?.phone||'—'),1090,290);
+ x.fillText('عنوان: '+(d.title||'—'),1090,330);
+ x.fillText('تاریخ ثبت: '+shamsiDate(d.date),1090,370);
+ if(d.dueDate) x.fillText('سررسید: '+shamsiDate(d.dueDate),1090,410);
+
+ x.strokeStyle='#d8e0ea';x.lineWidth=2;x.beginPath();x.moveTo(70,445);x.lineTo(1130,445);x.stroke();
+
+ const rows=[['مبلغ کل',money(d.amount)],['مجموع پرداخت',money(paidFor(d.id))],['مانده قابل پرداخت',money(remaining(d))]];
+ x.font='bold 29px Tahoma';
+ rows.forEach((r,i)=>{
+   let y=510+i*95;
+   x.fillStyle=i===2?'#b42318':'#16253a';
+   x.textAlign='right';x.fillText(r[0],1050,y);
+   x.textAlign='left';x.fillText(r[1],150,y);
+ });
+
+ x.fillStyle='#16253a';x.textAlign='right';x.font='bold 27px Tahoma';x.fillText('سابقه اقساط',1050,820);
+ x.font='21px Tahoma';
+ if(ps.length){
+   ps.forEach((p,i)=>{
+     let y=875+i*58;
+     x.fillText((i+1)+'. '+shamsiDate(p.date)+' — '+money(p.amount)+' '+(p.note||''),1050,y);
+   });
+ } else {
+   x.fillStyle='#65758a';x.fillText('هنوز پرداختی ثبت نشده است.',1050,875);
+ }
+
+ x.fillStyle='#16253a';x.font='22px Tahoma';x.fillText('نشانی: سرخس، طالقانی غربی، موبایل علی',1050,1240);
+ x.fillText('تماس: 09300517581 — 09158168025',1050,1280);
+ x.fillStyle='#65758a';x.font='18px Tahoma';x.fillText('این رسید توسط دفتر حساب موبایل علی صادر شده است.',1050,1360);
+
+ const data=canvas.toDataURL('image/png');
+ showModal(`<h3>رسید تصویری</h3><img src="${data}" style="width:100%;border-radius:12px"><div class="form-actions" style="margin-top:12px"><button class="btn primary" onclick="downloadData('${data}')">دانلود تصویر</button><button class="btn ok" onclick="shareData('${data}','${esc(c?.name||'')}')">اشتراک‌گذاری</button><button class="btn" onclick="smsText('${d.id}')">ارسال متن با پیامک</button></div><p class="hint">برای ارسال خودِ تصویر، گزینه «اشتراک‌گذاری» را بزنید و پیام‌رسان موردنظر را انتخاب کنید.</p><button class="btn" onclick="closeModal()">بستن</button>`);
+}
+function downloadData(data){let a=document.createElement('a');a.href=data;a.download='resid-mobail-ali.png';a.click()}
+async function shareData(data,name){try{let blob=await (await fetch(data)).blob(),file=new File([blob],'resid-mobail-ali.png',{type:'image/png'});if(navigator.share&&navigator.canShare?.({files:[file]}))await navigator.share({title:'رسید حساب موبایل علی',text:'رسید حساب '+name,files:[file]});else downloadData(data)}catch(e){}}
+function smsText(did){let d=db.debts.find(x=>x.id===did),c=db.customers.find(x=>x.id===d.customerId),text=`سلام ${c?.name||''}، مانده حساب شما نزد موبایل علی ${money(remaining(d))} است. بابت: ${d.title}.`;location.href='sms:'+(c?.phone||'')+'?body='+encodeURIComponent(text)}
+renderAll();
+</script>
+</body></html>
